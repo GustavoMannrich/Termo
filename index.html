@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termo</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <script defer src="./js/script.js"></script>
+</head>    
+<body>    
+    <form class="form">
+        <div class="cabecalho">
+            <h1 class="title">Termo</h1>
+            <img src="./images/info.png" alt="Estatísticas" class="statsButton">
+            <img src="./images/reload.png" alt="Recarregar" class="reload">            
+        </div>
+        <div class="statsPainel">
+            <span class="statsTitle">Estatísticas</span>
+            <span onclick="this.parentElement.style.visibility='hidden'" class="xButton">X</span>            
+            <div class="statsBars">
+                <div class="divStats statBar1">
+                    <span class="statsText">1 tentativa:</span>
+                    <span id="stat1" class="statLabel"></span>
+                </div>
+                <div class="divStats statBar2">
+                    <span class="statsText">2 tentativas:</span>
+                    <span id="stat2" class="statLabel"></span>
+                </div>
+                <div class="divStats statBar3">
+                    <span class="statsText">3 tentativas:</span>
+                    <span id="stat3" class="statLabel"></span>
+                </div>
+                <div class="divStats statBar4">
+                    <span class="statsText">4 tentativas:</span>
+                    <span id="stat4" class="statLabel"></span>
+                </div>
+                <div class="divStats statBar5">
+                    <span class="statsText">5 tentativas:</span>
+                    <span id="stat5" class="statLabel"></span>
+                </div>
+                <div class="divStats statBar6">
+                    <span class="statsText">6 tentativas:</span>
+                    <span id="stat6" class="statLabel"></span>
+                </div>
+                <div class="divStats statBar7">
+                    <span class="statsText">Derrotas:</span>
+                    <span id="stat7" class="statLabel"></span>
+                </div>
+            </div>
+        </div>
+        <div class="grid">
+        </div>
+        <div class="rodape">
+            <span class="creditos">Inspirado em: </span>
+            <a href="https://term.ooo">Term.ooo</a>
+        </div>
+    </form>
+</body>
+</html>
