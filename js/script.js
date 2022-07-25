@@ -7,19 +7,48 @@ const statsButton = document.querySelector('.statsButton');
 const wonMsg = document.querySelector('.wonMsg');
 const lostMsg = document.querySelector('.lostMsg');
 const letters = [];
-const correctWord = palavras[parseInt(Math.random() * palavras.length)]
-const correctWordNoAccent = correctWord.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '');
+const correctWord = palavras[parseInt(Math.random() * palavras.length)].toUpperCase()
+const correctWordNoAccent = correctWord.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '').toUpperCase();
 const letterMap = new Map();
 var word = '';
 var tries = 0;
+var letterBefore = '';
 
-const nextKey = (event) => {
-    if (event.key.length !== 1 || !event.key.match(/^[A-Za-z]+$/)) {
-        return;
+const isValidKeyCode = (keyCode) => {
+    // A-Z
+    if (keyCode >= 65 && keyCode <= 90) {
+        return true;
+    }
+
+    // a-z
+    if (keyCode >= 97 && keyCode <= 122) {
+        return true;
     }
     
+    return false
+}
+
+const nextKey = (event) => {    
     const letter = event.target;
-    letter.value = event.key;
+    
+    // No mobile o keyCode vem como 229 para todas as letras, então nesse caso deve pegar o keyCode do conteúdo do input
+    const keyCode = event.keyCode === 229? letter.value.charCodeAt(0) || 229: event.keyCode;
+
+    // Gambiarra para voltar pro input anterior ao clicar pra apagar o input. Feito isso
+    // porque não tenho como saber que tecla o usuário apertou, pois sempre retorna keyCode 229
+    if (keyCode === 229) {
+        if (letter.previousSibling.classList && letter.previousSibling.classList.contains("active"))
+            letter.previousSibling.focus();   
+    }
+
+    // Se não for A-Z    
+    if (!isValidKeyCode(keyCode)) {
+        return;
+    }    
+
+    if (event.keyCode !== 229) {
+        letter.value = event.key;
+    }    
 
     letter.classList.add('letterAnimation');
 
@@ -27,35 +56,41 @@ const nextKey = (event) => {
         letter.classList.remove('letterAnimation');
     }, 200)
     
-    if (letter.nextElementSibling) {
-        letter.nextElementSibling.focus();
+    if (letter.nextSibling) {
+        letter.nextSibling.focus();
     }
 };
 
-const keyDown = (event) => {
-    if (event.key.length === 1 || event.key.match(/^[A-Za-z]+$/)) {
-        event.preventDefault()
-    }
+const keyDown = (event) => {  
+    event.preventDefault();
+
+    // Se for A-Z
+    if (isValidKeyCode(event.keyCode)) {
+        // vai ser tratado no keyUp
+        return true;
+    }    
     
     const letter = event.target;
 
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
         checkWord();
     }
     else
-    if (event.key === "Delete" || event.key === "Backspace") {
-        letter.value = '';
+    if (event.key === "Delete" || event.key === "Backspace" || event.keyCode === 32 || event.keyCode === 229) {
+        letter.value = '';        
     }
 
     if (event.key === "ArrowLeft" || event.key === "ArrowUp" || event.key === "Backspace") {
         if (letter.previousSibling.classList && letter.previousSibling.classList.contains("active"))
             letter.previousSibling.focus();            
-    }            
+    }
     else 
-    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+    if (event.key === "ArrowRight" || event.key === "ArrowDown" || event.keyCode === 32) {
         if (letter.nextSibling.classList && letter.nextSibling.classList.contains("active"))
             letter.nextSibling.focus();    
-    }    
+    }
+    
+    return false;
 };
 
 const createLetters = () => {
@@ -79,6 +114,7 @@ const createLetters = () => {
 
             letter.addEventListener('keyup', nextKey);
             letter.addEventListener('keydown', keyDown);
+            letter.addEventListener('keypress', (e) => {e.preventDefault()});
         }        
     }
 
@@ -129,7 +165,7 @@ const gameEnded = (won) => {
 }
 
 const isValidWord = (thisWord) => {
-    return word === thisWord.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '');
+    return word === thisWord.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '').toUpperCase();
 }
 
 const shakeRow = () => {
@@ -157,6 +193,8 @@ const checkWord = () => {
         word += letter.value;
     }
 
+    word = word.toUpperCase();
+
     if (word.length === 5) {
         if (!palavrasValidas.find(isValidWord)) {
             shakeRow();
@@ -170,11 +208,17 @@ const checkWord = () => {
     }
 };
 
+const changeLetterColor = (letter, status) => {
+    setTimeout(() => {
+        letter.classList.add(status);
+    }, 500);
+};
+
 const verifyLetter = (letter, index, onlyRights) => {    
     if (onlyRights) {
-        if (letter.value === correctWordNoAccent.charAt(index)) {
-            letter.classList.add('right');
-            letterMap.get(letter.value).userInput++;
+        if (letter.value.toUpperCase() === correctWordNoAccent.charAt(index)) {
+            changeLetterColor(letter, 'right');
+            letterMap.get(letter.value.toUpperCase()).userInput++;
 
             // Pega a letra da palavra correta e joga pro input,
             // para mostrar os acentos, caso tenha
@@ -187,18 +231,18 @@ const verifyLetter = (letter, index, onlyRights) => {
     if (letter.classList.contains('right'))
         return;
 
-    map = letterMap.get(letter.value);
+    map = letterMap.get(letter.value.toUpperCase());
 
     if (map) {
         map.userInput++;
 
         if (map.userInput <= map.original) {
-            letter.classList.add('almost');
+            changeLetterColor(letter, 'almost');
             return;
         }            
     }
 
-    letter.classList.add('wrong');
+    changeLetterColor(letter, 'wrong');
 };
 
 const revealRow = () => {    
@@ -211,8 +255,8 @@ const revealRow = () => {
     for (let i = 0; i < 5; i++) {
         letter = document.getElementById(`${tries}${i}`);
         letter.classList.remove('active');
-        letter.classList.add('revealLetter');
         letter.disabled = true;
+        letter.classList.add('revealLetter');        
 
         verifyLetter(letter, i, true);
     }
