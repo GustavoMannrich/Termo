@@ -22,6 +22,28 @@ body {
     justify-content: center;
 }
 
+.gameMsg {    
+    width: 30%;
+    min-width: 150px;
+    max-width: 250px;
+    height: 25px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    position: relative;    
+}
+
+.wonMsg {
+    background-color: #3aa394;
+    visibility: hidden;
+    margin-bottom: -25px;
+}
+
+.lostMsg {
+    background-color: #312a2c;
+    visibility: hidden;
+}
+
 .cabecalho {
     display: flex;
     align-items: center;
@@ -34,7 +56,7 @@ body {
 }
 
 .reload:hover {
-    filter: invert(33%) sepia(7%) saturate(605%) hue-rotate(291deg) brightness(30%) contrast(90%);
+    filter: brightness(80%);/*invert(33%) sepia(7%) saturate(605%) hue-rotate(291deg) brightness(30%) contrast(90%);*/
     cursor: pointer;
     animation: rotateAnimation 1s infinite ease-in-out;
     transition: all 0.2s;
@@ -47,7 +69,7 @@ body {
 }
 
 .statsButton:hover {
-    filter: invert(33%) sepia(7%) saturate(605%) hue-rotate(291deg) brightness(30%) contrast(90%);
+    filter: brightness(80%);/*invert(33%) sepia(7%) saturate(605%) hue-rotate(291deg) brightness(30%) contrast(90%);*/
     cursor: pointer;
     transition: all 0.2s;
 }
@@ -135,8 +157,9 @@ a {
 }
 
 .statsPainel {
-    background-color: #5a4c50;
-    border: 3px solid rgb(31, 31, 31);
+    background-color: #615458;
+    border: 4px solid rgb(31, 31, 31);
+    border-radius: 10px;
     position: absolute;
     width: 80%;
     max-width: 600px;    
@@ -157,11 +180,12 @@ a {
 
 .xButton {
     position: absolute;
-    right: 2px;    
+    right: 12px;
     width: 15px;
     cursor: pointer;
     top: 0px;
-    color: rgb(31, 31, 31);
+    color: white;
+    font-size: 1.5rem;
 }
 
 .statsBars {
@@ -175,12 +199,16 @@ a {
 }
 
 .divStats {
-    background-color: #38878b;
+    background-color: #3aa394;
     height: 100%;
     min-height: 20px;
     max-height: 30px;
-    width: 100%;
-    border: 1px solid #113031;    
+    width: 100%;  
+    border-radius: 5px;
+}
+
+.statBar7 {
+    background-color: #312a2c;
 }
 
 .statsText {

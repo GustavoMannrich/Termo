@@ -4,6 +4,8 @@ const grid = document.querySelector('.grid');
 const reloadImage = document.querySelector('.reload');
 const statsPainel = document.querySelector('.statsPainel');
 const statsButton = document.querySelector('.statsButton');
+const wonMsg = document.querySelector('.wonMsg');
+const lostMsg = document.querySelector('.lostMsg');
 const letters = [];
 const correctWord = palavras[parseInt(Math.random() * palavras.length)]
 const correctWordNoAccent = correctWord.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '');
@@ -97,13 +99,25 @@ const showStats = (delay) => {
     }, delay);
 };
 
+const showEndMessage = (msgElement) => {
+    setTimeout(() => {
+        msgElement.style.visibility = 'visible';
+        msgElement.classList.add('fadeIn');
+
+        setTimeout(() => {
+            msgElement.classList.remove('fadeIn');
+        }, 500);
+    }, 1000);
+}
+
 const gameEnded = (won) => {
     if (won) {
         revealRow();
-        showStats(2000);        
+        showStats(2000);    
+        showEndMessage(wonMsg);
     }
     else {
-        alert(`Game Over!\nA palavra era: ${correctWord}`);
+        showEndMessage(lostMsg);
     }
 
     let stats = parseInt(localStorage.getItem(`ter.mo.stats.${tries + 1}`) || 0);
