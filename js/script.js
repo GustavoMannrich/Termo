@@ -112,13 +112,15 @@ const showEndMessage = (msgElement) => {
 
 const gameEnded = (won) => {
     if (won) {
-        revealRow();
-        showStats(2000);    
+        revealRow();        
         showEndMessage(wonMsg);
     }
     else {
+        lostMsg.innerHTML = `A palavra era: ${correctWord}`;
         showEndMessage(lostMsg);
     }
+
+    showStats(2000);
 
     let stats = parseInt(localStorage.getItem(`ter.mo.stats.${tries + 1}`) || 0);
     localStorage.setItem(`ter.mo.stats.${tries + 1}`, stats + 1);
