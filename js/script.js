@@ -7,7 +7,7 @@ const statsButton = document.querySelector('.statsButton');
 const wonMsg = document.querySelector('.wonMsg');
 const lostMsg = document.querySelector('.lostMsg');
 const letters = [];
-const correctWord = palavras[parseInt(Math.random() * palavras.length)].toUpperCase()
+const correctWord = 'teste';//palavras[parseInt(Math.random() * palavras.length)].toUpperCase()
 const correctWordNoAccent = correctWord.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '').toUpperCase();
 const letterMap = new Map();
 var word = '';
@@ -210,6 +210,9 @@ const checkWord = () => {
 
 const changeLetterColor = (letter, status) => {
     setTimeout(() => {
+        if (letter.classList.contains('right'))
+            return;
+
         letter.classList.add(status);
     }, 500);
 };
@@ -217,7 +220,7 @@ const changeLetterColor = (letter, status) => {
 const verifyLetter = (letter, index, onlyRights) => {    
     if (onlyRights) {
         if (letter.value.toUpperCase() === correctWordNoAccent.charAt(index)) {
-            changeLetterColor(letter, 'right');
+            changeLetterColor(letter, 'right');            
             letterMap.get(letter.value.toUpperCase()).userInput++;
 
             // Pega a letra da palavra correta e joga pro input,
@@ -227,9 +230,6 @@ const verifyLetter = (letter, index, onlyRights) => {
 
         return;    
     }
-    
-    if (letter.classList.contains('right'))
-        return;
 
     map = letterMap.get(letter.value.toUpperCase());
 
@@ -255,8 +255,8 @@ const revealRow = () => {
     for (let i = 0; i < 5; i++) {
         letter = document.getElementById(`${tries}${i}`);
         letter.classList.remove('active');
-        letter.disabled = true;
-        letter.classList.add('revealLetter');        
+        letter.classList.add('revealLetter');
+        letter.disabled = true;        
 
         verifyLetter(letter, i, true);
     }
