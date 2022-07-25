@@ -147,8 +147,6 @@ const checkWord = () => {
             return;
         }
 
-        console.log(`Palavra: ${word}`)
-
         if (word === correctWordNoAccent)
             gameEnded(true);
         else    
@@ -285,5 +283,3 @@ statsButton.addEventListener('click',  () => {
 loadLetterMap();
 createLetters();
 updateStats();
-
-console.log(correctWord);
