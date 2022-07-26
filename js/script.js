@@ -38,6 +38,10 @@ const nextKey = (event) => {
 
     // Se não for A-Z    
     if (!isValidKeyCode(keyCode)) {
+        if (event.keyCode === 229) {
+            letter.value = '';
+        }
+
         return;
     }    
 
