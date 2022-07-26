@@ -81,13 +81,25 @@ const keyDown = (event) => {
     }
 
     if (event.key === "ArrowLeft" || event.key === "ArrowUp" || event.key === "Backspace") {
-        if (letter.previousSibling.classList && letter.previousSibling.classList.contains("active"))
-            letter.previousSibling.focus();            
+        if (letter.previousSibling.classList && letter.previousSibling.classList.contains("active")) {
+            letter.previousSibling.focus();
+            letter.previousSibling.classList.add('letterSmallJump');
+
+            setTimeout(() => {
+                letter.previousSibling.classList.remove('letterSmallJump');
+            }, 200);
+        }            
     }
     else 
     if (event.key === "ArrowRight" || event.key === "ArrowDown" || event.keyCode === 32) {
-        if (letter.nextSibling.classList && letter.nextSibling.classList.contains("active"))
-            letter.nextSibling.focus();    
+        if (letter.nextSibling.classList && letter.nextSibling.classList.contains("active")) {
+            letter.nextSibling.focus();
+            letter.nextSibling.classList.add('letterSmallJump');
+
+            setTimeout(() => {
+                letter.nextSibling.classList.remove('letterSmallJump');
+            }, 200);
+        }            
     }
     
     return false;
@@ -143,13 +155,27 @@ const showEndMessage = (msgElement) => {
         setTimeout(() => {
             msgElement.classList.remove('fadeIn');
         }, 500);
-    }, 1000);
+    }, 1500);
 }
+
+const playLetterJumpAnimation = () => {
+    let letter;    
+    
+    for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+            letter = document.getElementById(`${tries}${i}`);
+            letter.classList.add('letterJump');
+
+            console.log(letter.id);         
+        }, 1000 + (i * 100));   
+    }    
+};
 
 const gameEnded = (won) => {
     if (won) {
         revealRow();        
         showEndMessage(wonMsg);
+        playLetterJumpAnimation();
     }
     else {
         lostMsg.innerHTML = `A palavra era: ${correctWord}`;
