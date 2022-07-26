@@ -15,13 +15,8 @@ var tries = 0;
 var letterBefore = '';
 
 const isValidKeyCode = (keyCode) => {
-    // A-Z
+    // A-Z e a-z na tabela de códigos do javascript
     if (keyCode >= 65 && keyCode <= 90) {
-        return true;
-    }
-
-    // a-z
-    if (keyCode >= 97 && keyCode <= 122) {
         return true;
     }
     
@@ -32,7 +27,7 @@ const nextKey = (event) => {
     const letter = event.target;
     
     // No mobile o keyCode vem como 229 para todas as letras, então nesse caso deve pegar o keyCode do conteúdo do input
-    const keyCode = event.keyCode === 229? letter.value.charCodeAt(0) || 229: event.keyCode;
+    const keyCode = event.keyCode === 229? letter.value.toUpperCase().charCodeAt(0) || 229: event.keyCode;
 
     // Gambiarra para voltar pro input anterior ao clicar pra apagar o input. Feito isso
     // porque não tenho como saber que tecla o usuário apertou, pois sempre retorna keyCode 229
@@ -48,6 +43,7 @@ const nextKey = (event) => {
 
     if (event.keyCode !== 229) {
         letter.value = event.key;
+        console.log(keyCode);
     }    
 
     letter.classList.add('letterAnimation');
