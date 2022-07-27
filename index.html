@@ -4,21 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light only">
+
+    <!-- Título do site -->
     <title>Termo</title>
 
+    <!-- CSS e FavIcon -->
     <link rel="stylesheet" href="./css/style.css">
     <link rel="icon" href="./favicon/favicon.ico">
+
+    <!-- Script -->
     <script defer src="./js/script.js"></script>
 </head>    
 <body>    
     <div class="form">
+        <!-- Mensagens -->
         <span class="gameMsg wonMsg">Você Venceu!</span>
         <span class="gameMsg lostMsg">A palavra era:</span>
+
+        <!-- Cabeçalho -->
         <div class="cabecalho">
             <h1 class="title">Termo</h1>
             <img src="./images/info.png" alt="Estatísticas" class="statsButton">
             <img src="./images/reload.png" alt="Recarregar" class="reload">            
         </div>        
+
+        <!-- Painel de estatísticas -->
         <div class="statsPainel">
             <span class="statsTitle">Estatísticas</span>
             <span onclick="this.parentElement.style.visibility='hidden'" class="xButton">X</span>            
@@ -53,8 +63,11 @@
                 </div>
             </div>
         </div>
-        <div class="grid">
-        </div>
+
+        <!-- Grid com as letras -->
+        <div class="grid"></div>
+
+        <!-- Rodapé -->
         <div class="rodape">
             <span class="creditos">Inspirado em: </span>
             <a href="https://term.ooo">Term.ooo</a>

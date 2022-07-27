@@ -1,27 +1,41 @@
+/* Importação da fonte Mitr */
 @import url('https://fonts.googleapis.com/css2?family=Mitr:wght@600&family=Roboto&display=swap');
 
+/* Definição das veriáveis */
+:root {
+    color-scheme: only light;
+    --colorGreen: #3aa394;
+    --colorYellow: #d3ad69;
+    --colorBlack: #312a2c;
+    --colorBrown: #6e5c62;
+    --colorMediumBrown: #615458;
+    --colorDarkBrown: #4c4347;    
+    --colorRed: #bd5757;
+    --colorWhite: #fff;    
+}
+
+/* Alterando a fonte e a cor da fonte de todos os componentes */
 * {   
     font-family: 'Mitr', sans-serif;
+    color: var(--colorWhite);
 }
 
-#root {
-    color-scheme: only light;
-}
-
+/* Aplicando um reset CSS básico e cor de fundo */
 body {    
     margin: 0;
     padding: 0;
     border: 0;    
-    background-color: #6e5c62;
+    background-color: var(--colorBrown);
     cursor: default;
     color-scheme: light;
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;    
+    justify-content: center;
     align-items: center;
 }
 
+/* Centralizando os componentes */
 .form {
     height: 100vh;
     min-height: 600px;
@@ -31,6 +45,7 @@ body {
     justify-content: center;
 }
 
+/* Mensagens */
 .gameMsg {    
     width: auto;
     padding-left: 10px;
@@ -39,57 +54,64 @@ body {
     display: flex;
     align-items: center;    
     justify-content: center;
-    color: white;
     border-radius: 5px;
     position: relative;
 }
 
+/* Mensagem de vitória */
 .wonMsg {
-    background-color: #3aa394;
+    background-color: var(--colorGreen);
     visibility: hidden;
     margin-bottom: -25px;
 }
 
+/* Mensagem de derrota */
 .lostMsg {
-    background-color: #312a2c;
+    background-color: var(--colorBlack);
     visibility: hidden;
 }
 
+/* Cabeçalho */
 .cabecalho {
     display: flex;
     align-items: center;
 }
 
+/* Título do site */
+.title {
+    text-transform: uppercase;
+}
+
+/* botão de Reload */
 .reload {
     width: 35px;
     height: 35px;
     margin-left: 15px;
 }
 
+/* Evento hover do botão de Reload */
 .reload:hover {
-    filter: brightness(80%);/*invert(33%) sepia(7%) saturate(605%) hue-rotate(291deg) brightness(30%) contrast(90%);*/
+    filter: brightness(80%);
     cursor: pointer;
     animation: rotateAnimation 1s infinite ease-in-out;
     transition: all 0.2s;
 }
 
+/* Botão das estatísticas */
 .statsButton {
     width: 35px;
     height: 35px;
     margin-left: 15px;
 }
 
+/* Evento hover do botão das estatísticas */
 .statsButton:hover {
-    filter: brightness(80%);/*invert(33%) sepia(7%) saturate(605%) hue-rotate(291deg) brightness(30%) contrast(90%);*/
+    filter: brightness(80%);
     cursor: pointer;
     transition: all 0.2s;
 }
 
-.title {
-    text-transform: uppercase;
-    color: white; 
-}
-
+/* Grid com as letras */
 .grid {
     width: fit-content;
     height: 100%;
@@ -99,75 +121,76 @@ body {
     gap: 3px;
 }
 
+/* Letra */
 .letter {
     width: 50px;
     height: 50px;
     text-align: center;
     text-transform: uppercase;
-    color: white;
-    background-color: #615458;
+    background-color: var(--colorMediumBrown);
     border-radius: 10%;
     cursor: pointer;
     outline: 0;    
     font-size: 2rem;
-    border: 5px solid #615458;
+    border: 5px solid var(--colorMediumBrown);
     caret-color: transparent;
     color-scheme: only light;    
 }
 
-.letter::selection {
-    background-color: transparent;    
-}
-
+/* Ao focar uma letra */
 .letter:focus {
-    box-shadow: inset 0 -6px 0 0 #4c4347;    
+    box-shadow: inset 0 -6px 0 0 var(--colorDarkBrown);    
 }
 
+/* Letras ativas */
 .active {
-    border: 5px solid #4c4347;    
-    background-color: #6e5c62;    
+    border: 5px solid var(--colorDarkBrown);
+    background-color: var(--colorBrown);
 }
 
+/* Animação ao digitar uma letra */
 .letterAnimation {
     animation: letterAnimation 0.2s linear;    
 }
 
+/* Animação de revelar uma letra */
 .revealLetter {
     animation: revealLetters 1s linear; 
 }
 
+/* Letra certa */
 .right {
-    background-color: #3aa394;
-    border-color: #3aa394;
+    background-color: var(--colorGreen);
+    border-color: var(--colorGreen);
 }
 
+/* Letra na posição errada */
 .almost {
-    background-color: #d3ad69;
-    border-color: #d3ad69;
+    background-color: var(--colorYellow);
+    border-color: var(--colorYellow);
 }
 
+/* Letra errada */
 .wrong {
-    background-color: #312a2c;
-    border-color: #312a2c;
+    background-color: var(--colorBlack);
+    border-color: var(--colorBlack);
 }
 
+/* Animação de chacoalhar a letra, quando a palavra não existe */
 .shakeLetter {
     animation: shakeAnimation 0.2s;
 }
 
+/* Rodapé */
 .rodape {
-    color: white;
     margin-top: 20px;
     font-size: 1.15rem;
 }
 
-a {
-    color: white;
-}
-
+/* Painel das estatísticas */
 .statsPainel {
-    background-color: #615458;
-    border: 4px solid rgb(31, 31, 31);
+    background-color: var(--colorMediumBrown);
+    border: 4px solid var(--colorBlack);
     border-radius: 10px;
     position: absolute;
     width: 90%;
@@ -178,25 +201,26 @@ a {
     visibility: hidden;
 }
 
+/* Título do painel das estatísticas */
 .statsTitle {
     font-size: 2rem;
     position: absolute;
     width: 100%;
     text-align: center;
     top: 0px;
-    color: white;
 }
 
+/* Botão X do painel das estatísticas */
 .xButton {
     position: absolute;
     right: 12px;
     width: 15px;
     cursor: pointer;
     top: 0px;
-    color: white;
     font-size: 1.5rem;
 }
 
+/* Div contendo as barras das estatísticas */
 .statsBars {
     width: auto;
     height: 100%;
@@ -207,49 +231,51 @@ a {
     padding-left: 110px;
 }
 
+/* Barra das estatísticas */
 .divStats {
-    background-color: #3aa394;
+    background-color: var(--colorGreen);
     height: 100%;
     min-height: 20px;
     max-height: 30px;
-    width: 100%;  
+    width: 100%;    
     border-radius: 5px;
 }
 
+/* Barra das derrotas */
 .statBar7 {
-    background-color: #312a2c;
+    background-color: var(--colorBlack);
 }
 
+/* Texto das barras */
 .statsText {
     width: 110px;
-    color: white;
     position: absolute;
     left: 0px;    
     text-align: right;
 }
 
+/* Número das estatísticas */
 .statLabel {
     position: relative;
-    left: 5px;
-    color: white;
+    left: 10px;
 }
 
+/* Animação de FadeIn */
 .fadeIn {
     animation: fadeInAnimation 0.5s;
 }
 
+/* Animação de pulo da letra */
 .letterJump {
     animation: letterJumpAnimation 0.5s;
 }
 
+/* Animação de pulo pequeno da letra */
 .letterSmallJump {
     animation: letterSmallJumpAnimation 0.2s;
 }
 
-@media (prefers-color-scheme: dark) {
-
-}
-
+/* Animação ao digitar uma letra */
 @keyframes letterAnimation {
     0% {
         transform: scale(1);
@@ -264,6 +290,7 @@ a {
     }
 }
 
+/* Animação de revelar uma letra */
 @keyframes revealLetters {
     0% {
         transform: rotateY(0deg);
@@ -278,10 +305,11 @@ a {
     }
 }
 
+/* Animação de chacoalhar a letra, quando a palavra não existe */
 @keyframes shakeAnimation {
     0% {
         transform: translateX(0px);
-        background-color: #bd5757;
+        background-color: var(--colorRed);
     }
 
     20% {
@@ -302,10 +330,11 @@ a {
 
     100% {
         transform: translateX(0px);
-        background-color: #bd5757;
+        background-color: var(--colorRed);
     }
 }
 
+/* Animação de FadeIn */
 @keyframes fadeInAnimation {
     0% {
         transform: translateY(100px);
@@ -318,6 +347,7 @@ a {
     }
 }
 
+/* Animação de girar (usado no botão Reload) */
 @keyframes rotateAnimation {
     0% {
         transform: rotateZ(0deg);
@@ -328,6 +358,7 @@ a {
     }
 }
 
+/* Animação de pulo da letra */
 @keyframes letterJumpAnimation {
     0% {
         transform: translateY(0px);
@@ -342,6 +373,7 @@ a {
     }
 }
 
+/* Animação de pulo pequeno da letra */
 @keyframes letterSmallJumpAnimation {
     0% {
         transform: translateY(0px);
